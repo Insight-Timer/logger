@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:io';
 import 'package:logger/src/logger.dart';
 import 'package:logger/src/log_output.dart';
 
@@ -7,6 +9,10 @@ import 'package:logger/src/log_output.dart';
 class ConsoleOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
-    event.lines.forEach(print);
+    if (Platform.isIOS) {
+      event.lines.forEach(log);
+    } else {
+      event.lines.forEach(print);
+    }
   }
 }
