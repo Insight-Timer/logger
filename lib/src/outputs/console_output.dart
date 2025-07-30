@@ -11,7 +11,9 @@ class ConsoleOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
     if (UniversalPlatform.isIOS) {
-      event.lines.forEach(log);
+      final StringBuffer buffer = StringBuffer();
+      event.lines.forEach(buffer.writeln);
+      log(buffer.toString());
     } else {
       event.lines.forEach(print);
     }
